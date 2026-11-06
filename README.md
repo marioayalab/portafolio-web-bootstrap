@@ -4,4 +4,4 @@ Es mi portafolio para el trabajo final del curso de Desarrollo Web de IDAT (cicl
 
 Las páginas son `index.html` (inicio), `proyectos.html`, `caso-aybiz.html`, `como-trabajo.html` y `contacto.html`.
 
-Bootstrap y las fuentes de Google se cargan desde internet, así que hace falta conexión para verlo bien. El formulario de contacto todavía no envía nada, porque el sitio es estático.
+Bootstrap y las fuentes de Google se cargan desde internet, así que hace falta conexión para verlo bien. El botón redondo del encabezado cambia entre modo día y modo noche; un script corto (`js/tema.js`) recuerda tu elección en ese navegador. El formulario de contacto todavía no envía nada, porque el sitio es estático.

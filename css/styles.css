@@ -1,7 +1,7 @@
 /* Estilos del portafolio de Mario Ayala. Bootstrap pone la maquetación; aquí van los colores, las fuentes, la retícula de la portada y las animaciones. */
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --fondo: #fff;
   --superficie: #fff;
   --azul: #1a3d6d;
@@ -115,6 +115,24 @@ header.sticky-top { background-color: var(--fondo); }
     linear-gradient(var(--azul), var(--azul)) 0 100% / 100% 2px no-repeat;
 }
 
+/* botón de modo día / noche: mismo círculo que el botón del menú; la luna pasa a sol al girar */
+.navbar-acciones { order: 1; display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.tema-boton {
+  position: relative; width: 48px; height: 48px; padding: 0;
+  border: 2px solid var(--azul); border-radius: 50%; background: transparent; color: var(--azul);
+  transition: transform .25s, background-color .3s;
+}
+.tema-boton:not([hidden]) { display: flex; align-items: center; justify-content: center; }
+.tema-boton:hover { transform: scale(1.08); background-color: var(--bloque); }
+.tema-boton svg {
+  position: absolute; width: 22px; height: 22px; fill: none; stroke: currentColor;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform .5s cubic-bezier(.2, .8, .2, 1), opacity .3s;
+}
+.tema-boton .sol { opacity: 0; transform: rotate(-90deg) scale(.4); }
+[data-bs-theme="dark"] .tema-boton .luna { opacity: 0; transform: rotate(90deg) scale(.4); }
+[data-bs-theme="dark"] .tema-boton .sol { opacity: 1; transform: none; }
+
 /* menú: los corchetes < > entran desde los lados del texto (dos imágenes de fondo de 10 x 24 px) */
 .navbar-nav .nav-link {
   --bs-nav-link-padding-x: 1.875rem;
@@ -144,11 +162,13 @@ header.sticky-top { background-color: var(--fondo); }
 }
 .navbar-nav .nav-link.active { font-weight: 600; }
 @media (max-width: 991.98px) {
-  .navbar-collapse { border-top: 1px solid var(--borde-suave); margin-top: 14px; }
+  .navbar-collapse { order: 2; border-top: 1px solid var(--borde-suave); margin-top: 14px; }
   .navbar-nav .nav-link { padding: .75rem 1.875rem; font-size: 1.1875rem; display: inline-block; }
 }
 @media (min-width: 992px) {
   .navbar > .container { padding: 18px 40px; }
+  .navbar-acciones { margin-left: 12px; }
+  .tema-boton { width: 44px; height: 44px; }
   .navbar-brand svg { width: 96px; height: 48px; }
   .navbar-nav { gap: 2px; }
 }
@@ -577,40 +597,39 @@ legend.form-legend { float: none; width: auto; font: 700 1.375rem/1.2 var(--fuen
 @media (min-width: 992px) { .pie { padding: 28px 0; } .pie .container { padding: 0 40px; } }
 
 
-/* ---------- modo oscuro (sigue la preferencia del sistema) ---------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --fondo: #0c1a2d;
-    --superficie: #12233b;
-    --azul: #8db5ec;
-    --azul-rgb: 141, 181, 236;
-    --azul-medio: #6c9ee0;
-    --boton: #2f66b0;
-    --cobre: #f0a06b;
-    --cobre-rgb: 240, 160, 107;
-    --cobre-fondo: #b4571f;
-    --texto: #e7edf6;
-    --texto-rgb: 231, 237, 246;
-    --texto-suave: #aebfd6;
-    --bloque: #172c49;
-    --borde: #2c4569;
-    --borde-suave: #1f3556;
-    --borde-hover: #4d6c99;
-    --calido: #242d3f;
-    --hover-fila: #18304f;
-    --aviso-fondo: #14304f;
-    --aviso-borde: #2e5588;
-    --pie-fondo: #08111e;
-    --marco-movil: #2c4569;
-    --sombra-rgb: 0, 0, 0;
-    --c-izq-cobre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 24'%3E%3Cpolyline points='8,2 2,12 8,22' fill='none' stroke='%23F0A06B' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    --c-der-cobre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 24'%3E%3Cpolyline points='2,2 8,12 2,22' fill='none' stroke='%23F0A06B' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    --c-izq-azul: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 24'%3E%3Cpolyline points='8,2 2,12 8,22' fill='none' stroke='%238DB5EC' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    --c-der-azul: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 24'%3E%3Cpolyline points='2,2 8,12 2,22' fill='none' stroke='%238DB5EC' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    --flecha-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='4,8 12,16 20,8' fill='none' stroke='%238DB5EC' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  }
-  .captura img, .movil-marco img { filter: brightness(.9); }
+/* ---------- modo oscuro: el botón del encabezado pone data-bs-theme="dark" en <html> ---------- */
+:root[data-bs-theme="dark"] {
+  color-scheme: dark;
+  --fondo: #0c1a2d;
+  --superficie: #12233b;
+  --azul: #8db5ec;
+  --azul-rgb: 141, 181, 236;
+  --azul-medio: #6c9ee0;
+  --boton: #2f66b0;
+  --cobre: #f0a06b;
+  --cobre-rgb: 240, 160, 107;
+  --cobre-fondo: #b4571f;
+  --texto: #e7edf6;
+  --texto-rgb: 231, 237, 246;
+  --texto-suave: #aebfd6;
+  --bloque: #172c49;
+  --borde: #2c4569;
+  --borde-suave: #1f3556;
+  --borde-hover: #4d6c99;
+  --calido: #242d3f;
+  --hover-fila: #18304f;
+  --aviso-fondo: #14304f;
+  --aviso-borde: #2e5588;
+  --pie-fondo: #08111e;
+  --marco-movil: #2c4569;
+  --sombra-rgb: 0, 0, 0;
+  --c-izq-cobre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 24'%3E%3Cpolyline points='8,2 2,12 8,22' fill='none' stroke='%23F0A06B' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --c-der-cobre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 24'%3E%3Cpolyline points='2,2 8,12 2,22' fill='none' stroke='%23F0A06B' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --c-izq-azul: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 24'%3E%3Cpolyline points='8,2 2,12 8,22' fill='none' stroke='%238DB5EC' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --c-der-azul: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 24'%3E%3Cpolyline points='2,2 8,12 2,22' fill='none' stroke='%238DB5EC' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --flecha-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='4,8 12,16 20,8' fill='none' stroke='%238DB5EC' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
+[data-bs-theme="dark"] .captura img, [data-bs-theme="dark"] .movil-marco img { filter: brightness(.9); }
 
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after { animation: none !important; transition: none !important; }
